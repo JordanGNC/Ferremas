@@ -3,6 +3,8 @@ from flask_restful import Api, Resource
 import requests
 from flask_cors import CORS
 import json
+from datetime import datetime
+from json import dumps
 
 app = Flask(__name__)
 api = Api(app)
@@ -23,14 +25,17 @@ class Boleta(Resource):
         global contador
         contador = contador + 1
 
-        json = request.get_json()
+        jsonn = request.get_json()
 
-        cliente_response = requests.get(url_cliente+"/"+ str(json["IdCli"]))
-        producto_response = requests.get(url_producto+"/"+ str(json["IdProd"]))
+        cliente_response = requests.get(url_cliente+"/"+ str(jsonn["IdCli"]))
+        producto_response = requests.get(url_producto+"/"+ str(jsonn["IdProd"]))
         print(cliente_response.status_code)
         if(cliente_response.status_code == 200 and producto_response.status_code == 200):
             cliente_json = cliente_response.json()
             producto_json = producto_response.json()    
+            date = datetime.now()
+            dt_str = date.strftime('%Y-%m-%d %H:%M:%S') 
+            json_date = json.dumps(dt_str)
 
             lista = {
                 "IdBoleta": contador,
@@ -42,9 +47,10 @@ class Boleta(Resource):
                 "MarcaProd": producto_json["marca"],
                 "TipoProd": producto_json["tipoProd"],
                 "PrecioProd": producto_json["precio"],
-                "Cantidad": json["Cantidad"],
-                "Total": producto_json["precio"] * json["Cantidad"],
-                "DespachoDomicilio": json["DespachoDomicilio"]}
+                "Cantidad": jsonn["Cantidad"],
+                "Total": producto_json["precio"] * jsonn["Cantidad"],
+                "DespachoDomicilio": jsonn["DespachoDomicilio"],
+                "FechaBoleta": json_date}
 
             
 
@@ -67,14 +73,18 @@ class BoletaById(Resource):
 
         #Definir datos de la boleta
 
-        json = request.get_json()
 
-        cliente_response = requests.get(url_cliente+"/"+ str(json["IdCli"]))
-        producto_response = requests.get(url_producto+"/"+ str(json["IdProd"]))
+        jsonn = request.get_json()
+
+        cliente_response = requests.get(url_cliente+"/"+ str(jsonn["IdCli"]))
+        producto_response = requests.get(url_producto+"/"+ str(jsonn["IdProd"]))
         print(cliente_response.status_code)
         if(cliente_response.status_code == 200 and producto_response.status_code == 200):
             cliente_json = cliente_response.json()
             producto_json = producto_response.json()    
+            date = datetime.now()
+            dt_str = date.strftime('%Y-%m-%d %H:%M:%S') 
+            json_date = json.dumps(dt_str)
 
             lista = {
                 "IdBoleta": id,
@@ -86,9 +96,10 @@ class BoletaById(Resource):
                 "MarcaProd": producto_json["marca"],
                 "TipoProd": producto_json["tipoProd"],
                 "PrecioProd": producto_json["precio"],
-                "Cantidad": json["Cantidad"],
-                "Total": producto_json["precio"] * json["Cantidad"],
-                "DespachoDomicilio": json["DespachoDomicilio"]}
+                "Cantidad": jsonn["Cantidad"],
+                "Total": producto_json["precio"] * jsonn["Cantidad"],
+                "DespachoDomicilio": jsonn["DespachoDomicilio"],
+                "FechaBoleta": json_date}
 
         else: 
             print("error")
