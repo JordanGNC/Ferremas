@@ -22,5 +22,30 @@
         <br>
         <button id="btnEnviar" class="btn btn-primary">Enviar</button>
     </form>
+
+    <script type="text/javascript">
+        const cboCliente = document.getElementById('cboCliente');
+        const listaClientes = fetch("http://localhost:14792/api/cliente", {
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            mode: 'cors'
+        });
+        listaClientes.then(async function(e){
+            await e.json().then(async function(objeto){
+                //console.log(objeto);
+                let itemsStr = "";
+                objeto.forEach(element => {
+                    console.log({element});
+                    itemsStr += "<option value='"+ element.id +"'>" + element.razonSocial + "</option>";
+                });
+                cboCliente.innerHTML = itemsStr;
+            });
+        });
+
+        
+
+    </script>
 </body>
 </html>
