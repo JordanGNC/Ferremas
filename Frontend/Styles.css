@@ -1,13 +1,14 @@
 body {
-    background-color: rgb(1, 92, 160);
+    background-color: rgb(28, 45, 58);
     font-size: large;
     color:aliceblue;
 
  }
 
-Header{
+h1{
     
     justify-content:center;
+    justify-self: center;
  }
  
  h3{
