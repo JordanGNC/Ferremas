@@ -7,8 +7,9 @@ from datetime import datetime
 from json import dumps
 
 app = Flask(__name__)
-api = Api(app)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+api = Api(app)
 
 url_cliente = "http://localhost:14792/api/Cliente"
 

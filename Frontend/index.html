@@ -17,13 +17,22 @@
         <label for="txtCantidad">Cantidad:</label>
         <input type="number" name="txtCantidad" id="txtCantidad">
         <br>
-        <label for="boxDespacho">Despacho a domicilio</label>
-        <input type="checkbox" name="boxDespacho" id="boxDespacho">
+        <ul>
+            <li>
+              <label for="opc1">Despacho a domicilio</label>
+              <input type="radio" id="opc1" name="entrega" />
+            </li>
+            <li>
+              <label for="opc1">Retiro en tienda</label>
+              <input type="radio" id="opc2" name="entrega" checked />
+            </li>
+          </ul>
         <br>
         <button id="btnEnviar" class="btn btn-primary">Enviar</button>
     </form>
 
     <script type="text/javascript">
+        //Combo Cliente
         const cboCliente = document.getElementById('cboCliente');
         const listaClientes = fetch("http://localhost:14792/api/cliente", {
             headers: {
@@ -34,18 +43,79 @@
         });
         listaClientes.then(async function(e){
             await e.json().then(async function(objeto){
-                //console.log(objeto);
                 let itemsStr = "";
                 objeto.forEach(element => {
                     console.log({element});
-                    itemsStr += "<option value='"+ element.id +"'>" + element.razonSocial + "</option>";
+                    itemsStr += "<option value='"+ element.id +"'>" + element.nombre + "</option>";
                 });
                 cboCliente.innerHTML = itemsStr;
             });
         });
 
-        
+        //Combo Producto
 
+        const cboProducto = document.getElementById('cboProducto');
+        const listaProducto = fetch("http://localhost:14792/api/producto", {
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            mode: 'cors'
+        });
+        listaProducto.then(async function(e){
+            await e.json().then(async function(objeto){
+                let itemsStr = "";
+                objeto.forEach(element => {
+                    console.log({element});
+                    itemsStr += "<option value='"+ element.id +"'>" + element.nombre + "</option>";
+                });
+                cboProducto.innerHTML = itemsStr;
+            });
+        });
+
+        //boton enviar
+
+        function clickEnviar(e){
+            e.preventDefault();
+            const idCliente = document.getElementById("cboCliente").value;
+            const idProducto = document.getElementById("cboProducto").value;
+            const cantidad = parseInt(document.getElementById("txtCantidad").value);
+
+            boolDespacho = false;
+
+            if(document.getElementById("opc1").checked){
+                boolDespacho = true
+            }else{
+                boolDespacho = false
+            };
+            
+            const objEnvio = {
+                "IdCli": idCliente,
+                "IdProd": idProducto,
+                "Cantidad": cantidad,
+                "DespachoDomicilio": boolDespacho
+            };
+            console.log({objEnvio});
+            
+            // POST a la api boleta
+            fetch("http://localhost:5002/api/boleta/", {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                },
+                mode: 'cors',
+                method: 'POST',
+                body: JSON.stringify(objEnvio)
+            }).then(async function(e){
+                await e.json().then((obj) => { console.log({obj}) });
+            }).catch(function(error){ alert(error.message) })
+            .finally(function(){
+                alert("Completado");
+            });
+        }   
+        
+        const btnEnviar = document.getElementById('btnEnviar');
+        btnEnviar.addEventListener("click", clickEnviar);    
     </script>
 </body>
 </html>

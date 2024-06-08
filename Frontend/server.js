@@ -1,4 +1,5 @@
 //localhost
+//ejecutar en cmd: node server.js
 
 const http = require('http');
 const fs = require('fs');
