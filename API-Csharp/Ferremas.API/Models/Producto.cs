@@ -12,5 +12,6 @@ namespace Ferremas.API.Models
         public int Precio { get; set; }
         public string Marca { get; set; }
         public string TipoProd { get; set; }
+        public string Stock { get; set; }
     }
 }
