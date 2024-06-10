@@ -3,33 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>venta</title>
 </head>
 <body>
-    <form>
-        <label for="cboCliente">Cliente:</label>
-        <select name="cboCliente" id="cboCliente"></select>
-        <br>
-        <label for="cboProducto">Producto:</label>
-        <select name="cboProducto" id="cboProducto">
-        </select>
-        <br>
-        <label for="txtCantidad">Cantidad:</label>
-        <input type="number" name="txtCantidad" id="txtCantidad">
-        <br>
-        <ul>
-            <li>
-              <label for="opc1">Despacho a domicilio</label>
-              <input type="radio" id="opc1" name="entrega" />
-            </li>
-            <li>
-              <label for="opc1">Retiro en tienda</label>
-              <input type="radio" id="opc2" name="entrega" checked />
-            </li>
-          </ul>
-        <br>
-        <button id="btnEnviar" class="btn btn-primary">Enviar</button>
-    </form>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Venta</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <!-- CLIENTE-->
+                    <div class="mb-3">
+                        <label for="cboCliente" class="form-label">Cliente:</label>
+                        <select name="cboCliente" id="cboCliente"></select>
+                    </div>
+    
+                    <!-- PRODUCTO-->
+                    <div class="mb-3">
+                        <label for="cboProducto" class="form-label">Producto:</label>
+                        <select name="cboProducto" id="cboProducto"></select>
+                    </div>
+    
+                     <!-- CANTIDAD-->
+                     <div class="mb-3">
+                        <label for="txtCantidad" class="form-label">Cantidad:</label>
+                        <input type="number" name="txtCantidad" id="txtCantidad">
+                     </div>
+    
+                     <div class="mb-3">
+                        <ul>
+                            <li>
+                              <label for="opc1">Despacho a domicilio</label>
+                              <input type="radio" id="opc1" name="entrega" />
+                            </li>
+                            <li>
+                              <label for="opc2">Retiro en tienda</label>
+                              <input type="radio" id="opc2" name="entrega" checked />
+                            </li>
+                          </ul>
+                     </div>
+                    <button id="btnEnviar" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript">
         //Combo Cliente
@@ -81,12 +100,12 @@
             const idProducto = document.getElementById("cboProducto").value;
             const cantidad = parseInt(document.getElementById("txtCantidad").value);
 
-            boolDespacho = false;
+            boolDespacho = "";
 
             if(document.getElementById("opc1").checked){
-                boolDespacho = true
+                boolDespacho = "Despacho a domicilio"
             }else{
-                boolDespacho = false
+                boolDespacho = "Retiro en tienda"
             };
             
             const objEnvio = {
@@ -99,6 +118,22 @@
             
             // POST a la api boleta
             fetch("http://localhost:5002/api/boleta/", {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                },
+                mode: 'cors',
+                method: 'POST',
+                body: JSON.stringify(objEnvio)
+            }).then(async function(e){
+                await e.json().then((obj) => { console.log({obj}) });
+            }).catch(function(error){ alert(error.message) })
+            .finally(function(){
+                alert("Completado");
+            });
+
+            // POST a la api boleta
+            fetch("http://127.0.0.1:5003/api/logistica/", {
                 headers: {
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*",

@@ -12,6 +12,10 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 url_boleta = "http://localhost:5002/api/boleta"
 
+url_cliente = "http://localhost:14792/api/Cliente"
+
+url_producto = "http://localhost:14792/api/Producto"
+
 contador = -1
 
 DatosLogistica = []
@@ -24,36 +28,30 @@ class Logistica(Resource):
 
         jsonn = request.get_json()
 
-        boleta_response = requests.get(url_boleta+"/"+ str(jsonn["IdBoleta"]))
-        print(boleta_response.status_code)
-        if(boleta_response.status_code == 200):
-            boleta_json = boleta_response.json()
+        cliente_response = requests.get(url_cliente+"/"+ str(jsonn["IdCli"]))
+        producto_response = requests.get(url_producto+"/"+ str(jsonn["IdProd"]))
+        print(cliente_response.status_code)
+        if(cliente_response.status_code == 200 and producto_response.status_code == 200):
+            cliente_json = cliente_response.json()
+            producto_json = producto_response.json()    
+            date = datetime.now()
+            dt_str = date.strftime('%Y-%m-%d %H:%M:%S') 
+            json_date = json.dumps(dt_str)
 
             #id boleta, direccion, telefono, despacho a domicilio, fecha*, estado de envio
-            txtTipoEntrega = ""
-            if boleta_json["DespachoDomicilio"] == True:
-                txtTipoEntrega = "Despacho a domicilio"
-            else: 
-                txtTipoEntrega = "Retiro en tienda"
 
-            txtEstado = ""
-            if boleta_json["DespachoDomicilio"] == True:
-                txtEstado = "En camino hacia su direccion: "+boleta_json["DireccionCli"]
-            else:
-                txtEstado = "Esperando el retiro en tienda de parte del cliente"
+            txtEstado = "Procesando compra"
 
             lista = {
-                "Idpedido": contador,
-                "IdBoleta": boleta_json["IdBoleta"],
-                "NombreCli": boleta_json["NombreCli"],
-                "DireccionCli": boleta_json["DireccionCli"],
-                "NombreProd": boleta_json["NombreProd"],
-                "PrecioProd": boleta_json["PrecioProd"],
-                "Cantidad": boleta_json["Cantidad"],
-                "Total": boleta_json["Total"],
-                "TipoDeEntrega": txtTipoEntrega,
+                "IdPedido": contador,
+                "NombreCli": cliente_json["nombre"],
+                "DireccionCli": cliente_json["direccion"],
+                "NombreProd": producto_json["nombre"],
+                "Cantidad": jsonn["Cantidad"],
+                "TipodeEntrega": jsonn["DespachoDomicilio"],
                 "Estado": txtEstado,
-                "FechaBoleta": boleta_json["FechaBoleta"]}
+                "FechaPedido": json_date}
+
 
         else: 
             print("error")
@@ -69,46 +67,9 @@ class LogisticaById(Resource):
         return DatosLogistica[id]
     
     def put(self, id):
-        DatosLogistica.pop(id)
-
         jsonn = request.get_json()
-
-        boleta_response = requests.get(url_boleta+"/"+ str(jsonn["IdBoleta"]))
-        print(boleta_response.status_code)
-        if(boleta_response.status_code == 200):
-            boleta_json = boleta_response.json()
-
-            #id boleta, direccion, telefono, despacho a domicilio, fecha*, estado de envio
-            txtTipoEntrega = ""
-            if boleta_json["DespachoDomicilio"] == True:
-                txtTipoEntrega = "Despacho a domicilio"
-            else: 
-                txtTipoEntrega = "Retiro en tienda"
-
-            txtEstado = ""
-            if boleta_json["DespachoDomicilio"] == True:
-                txtEstado = "En camino hacia su direccion: "+boleta_json["DireccionCli"]
-            else:
-                txtEstado = "Esperando el retiro en tienda de parte del cliente"
-
-            lista = {
-                "Idpedido": id,
-                "IdBoleta": boleta_json["IdBoleta"],
-                "NombreCli": boleta_json["NombreCli"],
-                "DireccionCli": boleta_json["DireccionCli"],
-                "NombreProd": boleta_json["NombreProd"],
-                "PrecioProd": boleta_json["PrecioProd"],
-                "Cantidad": boleta_json["Cantidad"],
-                "Total": boleta_json["Total"],
-                "TipoDeEntrega": txtTipoEntrega,
-                "Estado": txtEstado,
-                "FechaBoleta": boleta_json["FechaBoleta"]}
-
-        else: 
-            print("error")
-
-        DatosLogistica.insert(id,lista)
-        return ""
+        DatosLogistica[id]['Estado'] = jsonn['Estado']
+        return DatosLogistica
     
 
     def delete(self, id):

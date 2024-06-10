@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>logistica</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">logistica</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <!-- id de Pedido-->
+                    <div class="mb-3">
+                        <label for="cboPedido" class="form-label">ID de pedido:</label>
+                        <select name="cboPedido" id="cboPedido"></select>
+                    </div>
+    
+                     <!-- Estado-->
+                     <div class="mb-3">
+                        <label for="txtEstado" class="form-label">Estado:</label>
+                        <input type="string" name="txtEstado" id="txtEstado">
+                     </div>
+                    <button id="btnEnviar" class="btn btn-primary">Cambiar estado</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        const cboPedido = document.getElementById('cboPedido');
+        const listaPedido = fetch("http://localhost:5003/api/logistica/", {
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            mode: 'cors'
+        });
+        listaPedido.then(async function(e){
+            await e.json().then(async function(objeto){
+                let itemsStr = "";
+                objeto.forEach(element => {
+                    console.log({element});
+                    itemsStr += "<option value='"+ element.IdPedido +"'>" + element.IdPedido + "</option>";
+                });
+                cboPedido.innerHTML = itemsStr;
+            });
+        });
+
+        //boton guardar
+        function clickGuardar(e){
+            e.preventDefault();
+            const idProducto = document.getElementById("cboProducto").value;
+            const cantidad = parseInt(document.getElementById("txtCantidad").value);
+
+        }
+
+        //boton enviar
+        function clickEnviar(e){
+            e.preventDefault();
+            const idPedido = document.getElementById("cboPedido").value;
+            const estado = document.getElementById("txtEstado").value;
+
+            const objEnvio = {
+                "Estado": estado
+            };
+            console.log({objEnvio});
+            
+            // POST a la api boleta
+            fetch("http://localhost:5003/api/logistica/"+idPedido,{
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                mode: 'cors',
+                method: 'PUT',
+                body: JSON.stringify(objEnvio)
+            }).then(async function(e){
+                await e.json().then((obj) => { console.log({obj}) });
+            }).catch(function(error){ alert(error.message) })
+            .finally(function(){
+                alert("Completado");
+            });
+        }   
+        
+        const btnEnviar = document.getElementById('btnEnviar');
+        btnEnviar.addEventListener("click", clickEnviar);    
+    </script>
+</body>
+</html>
