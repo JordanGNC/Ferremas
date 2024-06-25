@@ -26,39 +26,61 @@
                         <input type="string" name="txtEstado" id="txtEstado">
                      </div>
                     <button id="btnEnviar" class="btn btn-primary">Cambiar estado</button>
+                    <button id="btnMostrar" class="btn btn-primary" style="background-color: green;">Mostrar pedidos</button>
                 </form>
             </div>
         </div>
+    </div>
+    <div class="container" id="mostrarPedidos">
+
     </div>
 
     <script type="text/javascript">
 
         const cboPedido = document.getElementById('cboPedido');
-        const listaPedido = fetch("http://localhost:5003/api/logistica/", {
+        fetch("http://localhost:5003/api/logistica/", {
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*",
             },
             mode: 'cors'
-        });
-        listaPedido.then(async function(e){
-            await e.json().then(async function(objeto){
+        }).then(data => {
+            const listaPedido = data;
+
+            listaPedido.json().then(async function(objeto){
                 let itemsStr = "";
-                objeto.forEach(element => {
+                await objeto.forEach(element => {
                     console.log({element});
                     itemsStr += "<option value='"+ element.IdPedido +"'>" + element.IdPedido + "</option>";
                 });
                 cboPedido.innerHTML = itemsStr;
+
+                //boton Mostrar
+                async function clickMostrar(e){
+                e.preventDefault();
+                document.getElementById('mostrarPedidos').innerHTML = '';
+                let tabla = '<table class="table">';
+                tabla = tabla + '<tr> <th>ID</th> <th>Cliente</th> <th>Estado</th> <th>Tipo de entrega</th> <th>Fecha del pedido</th></tr>';
+                    await objeto.forEach(element => {
+                        tabla = tabla + '<tr>';
+                        tabla = tabla + '<td>'+element.IdPedido+'</td>';
+                        tabla = tabla + '<td>'+element.NombreCli+'</td>';
+                        tabla = tabla + '<td>'+element.Estado+'</td>';
+                        tabla = tabla + '<td>'+element.TipodeEntrega+'</td>';
+                        tabla = tabla + '<td>'+element.FechaPedido+'</td>';
+                        tabla = tabla + '</tr>';
+                    });
+                tabla = tabla + '</table>';
+                document.getElementById('mostrarPedidos').innerHTML = tabla;
+                }
+                const btnMostrar = document.getElementById('btnMostrar');
+                btnMostrar.addEventListener("click", clickMostrar);
+
             });
+
+                
         });
-
-        //boton guardar
-        function clickGuardar(e){
-            e.preventDefault();
-            const idProducto = document.getElementById("cboProducto").value;
-            const cantidad = parseInt(document.getElementById("txtCantidad").value);
-
-        }
+        
 
         //boton enviar
         function clickEnviar(e){
@@ -84,11 +106,16 @@
             }).catch(function(error){ alert(error.message) })
             .finally(function(){
                 alert("Completado");
-            });
+            })
+
+            setInterval("location.reload()",5);
+
         }   
         
         const btnEnviar = document.getElementById('btnEnviar');
         btnEnviar.addEventListener("click", clickEnviar);    
+
+
     </script>
 </body>
 </html>
