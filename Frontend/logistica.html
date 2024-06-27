@@ -26,6 +26,7 @@
                         <input type="string" name="txtEstado" id="txtEstado">
                      </div>
                     <button id="btnEnviar" class="btn btn-primary">Cambiar estado</button>
+                    <button id="btnMostrarId" class="btn btn-primary" style="background-color: chocolate;">Mostrar pedido por id</button>
                     <button id="btnMostrar" class="btn btn-primary" style="background-color: green;">Mostrar pedidos</button>
                 </form>
             </div>
@@ -37,6 +38,8 @@
 
     <script type="text/javascript">
 
+
+        //GET a la api logistica
         const cboPedido = document.getElementById('cboPedido');
         fetch("http://localhost:5003/api/logistica/", {
             headers: {
@@ -80,6 +83,44 @@
 
                 
         });
+
+        //boton mostrar por id
+
+        async function clickMostrarId(e){
+            e.preventDefault();
+            const idPedido = document.getElementById("cboPedido").value;
+            //GET por id a la api boleta
+            fetch("http://localhost:5003/api/logistica/"+idPedido, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                },
+                mode: 'cors'
+            }).then(data => {
+                const pedido = data;
+                
+                pedido.json().then(async function(objeto){
+                
+                let tabla = '<table class="table">';
+                tabla = tabla + '<tr> <th>ID</th> <th>Cliente</th> <th>Estado</th> <th>Tipo de entrega</th> <th>Fecha del pedido</th></tr>';
+        
+                tabla = tabla + '<tr>';
+                tabla = tabla + '<td>'+objeto.IdPedido+'</td>';
+                tabla = tabla + '<td>'+objeto.NombreCli+'</td>';
+                tabla = tabla + '<td>'+objeto.Estado+'</td>';
+                tabla = tabla + '<td>'+objeto.TipodeEntrega+'</td>';
+                tabla = tabla + '<td>'+objeto.FechaPedido+'</td>';
+                tabla = tabla + '</tr>';
+
+                tabla = tabla + '</table>';
+                document.getElementById('mostrarPedidos').innerHTML = tabla;
+
+
+            
+                });
+            });
+        }
+        
         
 
         //boton enviar
@@ -93,7 +134,7 @@
             };
             console.log({objEnvio});
             
-            // POST a la api boleta
+            // POST a la api logistica
             fetch("http://localhost:5003/api/logistica/"+idPedido,{
                 headers: {
                     "Content-Type": "application/json",
@@ -114,6 +155,9 @@
         
         const btnEnviar = document.getElementById('btnEnviar');
         btnEnviar.addEventListener("click", clickEnviar);    
+
+        const btnMostrarId = document.getElementById('btnMostrarId');
+        btnMostrarId.addEventListener("click", clickMostrarId);
 
 
     </script>
