@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lqxmYYqoMmETa126Q+VMyewgKnZq9/8NCMK7cy5Ddv8NDXuxgwCllMk+yEjCRKSv2FRC/P/cjNpC9HqFuOHYbA==",
+  "dgSpecHash": "IlWZoJ1RlG6Vz1x5LrQOL+Pf1XZuXUF4bzmKpwpZfzuwJYyVUEBAilZM0pIfTLKlqVgIQ6LFMs4g5GX9EfFjDA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jorda\\OneDrive\\Escritorio\\Nueva carpeta\\Ferremas\\API-Csharp\\Ferremas.API\\Ferremas.API.csproj",
+  "projectFilePath": "C:\\Users\\Jorda\\OneDrive\\Escritorio\\Nueva carpeta (2)\\Ferremas\\API-Csharp\\Ferremas.API\\Ferremas.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jorda\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Jorda\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

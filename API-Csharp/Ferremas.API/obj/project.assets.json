@@ -461,11 +461,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jorda\\OneDrive\\Escritorio\\Nueva carpeta\\Ferremas\\API-Csharp\\Ferremas.API\\Ferremas.API.csproj",
+      "projectUniqueName": "C:\\Users\\Jorda\\OneDrive\\Escritorio\\Nueva carpeta (2)\\Ferremas\\API-Csharp\\Ferremas.API\\Ferremas.API.csproj",
       "projectName": "Ferremas.API",
-      "projectPath": "C:\\Users\\Jorda\\OneDrive\\Escritorio\\Nueva carpeta\\Ferremas\\API-Csharp\\Ferremas.API\\Ferremas.API.csproj",
+      "projectPath": "C:\\Users\\Jorda\\OneDrive\\Escritorio\\Nueva carpeta (2)\\Ferremas\\API-Csharp\\Ferremas.API\\Ferremas.API.csproj",
       "packagesPath": "C:\\Users\\Jorda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jorda\\OneDrive\\Escritorio\\Nueva carpeta\\Ferremas\\API-Csharp\\Ferremas.API\\obj\\",
+      "outputPath": "C:\\Users\\Jorda\\OneDrive\\Escritorio\\Nueva carpeta (2)\\Ferremas\\API-Csharp\\Ferremas.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

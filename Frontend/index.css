@@ -1,0 +1,58 @@
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(120, 119, 119);
+}
+body{
+    background-color:  darkgray;
+}
+.btnLog {
+    background-color:rgb(255, 239, 138);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10%;
+}
+
+nav {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.imglog{
+    height: 10%;
+    width: 15%;
+}
+
+.card{
+    background-color: rgb(255, 239, 138);
+}
+
+.custom-height {
+    height: 20%; 
+    object-fit: contain; 
+}
+.footer-perso{
+    background-color: rgb(120, 119, 119);
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+
+
+.content-wrapper {
+    display:contents;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
