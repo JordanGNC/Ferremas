@@ -65,3 +65,36 @@ C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.AP
 C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.csproj.CopyComplete
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\Ferremas.API.StaticWebAssets.xml
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\Ferremas.API.exe
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\Ferremas.API.deps.json
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\Ferremas.API.runtimeconfig.json
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\Ferremas.API.runtimeconfig.dev.json
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\Ferremas.API.dll
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\Ferremas.API.pdb
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.csproj.AssemblyReference.cache
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.AssemblyInfoInputs.cache
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.AssemblyInfo.cs
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.csproj.CoreCompileInputs.cache
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.sourcelink.json
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.RazorTargetAssemblyInfo.cache
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\staticwebassets\Ferremas.API.StaticWebAssets.Manifest.cache
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\staticwebassets\Ferremas.API.StaticWebAssets.Pack.cache
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.Ferremas.API.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.Ferremas.API.props
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.Ferremas.API.props
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.Ferremas.API.props
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.C2C570F3.Up2Date
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.dll
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.pdb
+C:\Users\gisel\OneDrive\Escritorio\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.genruntimeconfig.cache
