@@ -1,4 +1,5 @@
-﻿using Ferremas.API.Models;
+﻿using Ferremas.API.Data;
+using Ferremas.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,43 +14,39 @@ namespace Ferremas.API.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-
-        private static IList<Cliente> lista = new List<Cliente>();
-
         // GET: api/<ClienteController>
         [HttpGet]
-        public IEnumerable<Cliente> Get()
+        public List<Cliente> Get()
         {
-            return lista;
+            return ClienteData.GetAllCli();
         }
 
         // GET api/<ClienteController>/5
         [HttpGet("{id}")]
         public Cliente Get(int id)
         {
-            return lista.FirstOrDefault(x => x.Id == id);
+            return ClienteData.GetCli(id);
         }
 
         // POST api/<ClienteController>
         [HttpPost]
-        public void Post([FromBody] Cliente value)
+        public bool Post([FromBody] Cliente oCliente)
         {
-            lista.Add(value);
+            return ClienteData.PostCli(oCliente);
         }
 
         // PUT api/<ClienteController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Cliente value)
+        public bool Put(int id, [FromBody] Cliente oCliente)
         {
-            Cliente selection = lista.FirstOrDefault(x => x.Id == id);
-            lista[lista.IndexOf(selection)] = value;
+            return ClienteData.PutCli(id, oCliente);
         }
 
         // DELETE api/<ClienteController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-            lista.Remove(lista.FirstOrDefault(x => x.Id == id));
+            return ClienteData.DeleteCli(id);
         }
     }
 }

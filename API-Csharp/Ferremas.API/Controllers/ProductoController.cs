@@ -1,4 +1,5 @@
-﻿using Ferremas.API.Models;
+﻿using Ferremas.API.Data;
+using Ferremas.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,38 +19,37 @@ namespace Ferremas.API.Controllers
 
         // GET: api/<ProductoController>
         [HttpGet]
-        public IEnumerable<Producto> Get()
+        public List<Producto> Get()
         {
-            return lista;
+            return ProductoData.GetAllProd();
         }
 
         // GET api/<ProductoController>/5
         [HttpGet("{id}")]
         public Producto Get(int id)
         {
-            return lista.FirstOrDefault(x => x.Id == id);
+            return ProductoData.GetProd(id);
         }
 
         // POST api/<ProductoController>
         [HttpPost]
-        public void Post([FromBody] Producto value)
+        public bool Post([FromBody] Producto oProducto)
         {
-            lista.Add(value);
+            return ProductoData.PostProd(oProducto);
         }
 
         // PUT api/<ProductoController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Producto value)
+        public bool Put(int id, [FromBody] Producto oProducto)
         {
-            Producto selection = lista.FirstOrDefault(x => x.Id == id);
-            lista[lista.IndexOf(selection)] = value;
+            return ProductoData.PutProd(id, oProducto);
         }
 
         // DELETE api/<ProductoController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-            lista.Remove(lista.FirstOrDefault(x => x.Id == id));
+            return ProductoData.DeleteProd(id);
         }
     }
 }

@@ -58,3 +58,10 @@ C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.AP
 C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.dll
 C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.pdb
 C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.genruntimeconfig.cache
+C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Jorda\OneDrive\Escritorio\Nueva carpeta\Ferremas\API-Csharp\Ferremas.API\obj\Debug\netcoreapp3.1\Ferremas.API.csproj.CopyComplete

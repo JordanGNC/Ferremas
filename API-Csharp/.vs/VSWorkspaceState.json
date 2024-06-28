@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\Ferremas.API",
-    "\\Ferremas.API\\Models"
+    "\\Ferremas.API\\Data"
   ],
-  "SelectedNode": "\\Ferremas.API\\Startup.cs",
+  "SelectedNode": "\\Ferremas.sln",
   "PreviewInSolutionExplorer": false
 }
