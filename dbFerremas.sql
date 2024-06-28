@@ -85,3 +85,4 @@ JOIN boleta ON pedido.idPedido=boleta.idBoleta;
 --SELECT * FROM boleta
 
 --SELECT * FROM pedido
+

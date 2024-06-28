@@ -349,8 +349,8 @@
 			boleta.tipoEntrega,
 			boleta.fechaBoleta
 		FROM pedido
-		JOIN boleta ON pedido.idPedido = boleta.idBoleta
-		JOIN cliente ON boleta.idBoleta = cliente.idCliente
+		inner JOIN boleta ON pedido.boletaId = boleta.idBoleta
+		inner JOIN cliente ON boleta.clienteId = cliente.idCliente
 		WHERE idPedido = @id
 
 	END
@@ -368,8 +368,8 @@
 			boleta.tipoEntrega,
 			boleta.fechaBoleta
 		FROM pedido
-		JOIN boleta ON pedido.idPedido = boleta.idBoleta
-		JOIN cliente ON boleta.idBoleta = cliente.idCliente
+		inner JOIN boleta ON pedido.boletaId = boleta.idBoleta
+		inner JOIN cliente ON boleta.clienteId = cliente.idCliente
 
 	END
 
