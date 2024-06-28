@@ -112,28 +112,12 @@
                 "IdCli": idCliente,
                 "IdProd": idProducto,
                 "Cantidad": cantidad,
-                "DespachoDomicilio": boolDespacho
+                "TipoEntrega": boolDespacho
             };
             console.log({objEnvio});
             
             // POST a la api boleta
             fetch("http://localhost:5002/api/boleta/", {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
-                },
-                mode: 'cors',
-                method: 'POST',
-                body: JSON.stringify(objEnvio)
-            }).then(async function(e){
-                await e.json().then((obj) => { console.log({obj}) });
-            }).catch(function(error){ alert(error.message) })
-            .finally(function(){
-                alert("Completado");
-            });
-
-            // POST a la api boleta
-            fetch("http://127.0.0.1:5003/api/logistica/", {
                 headers: {
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*",

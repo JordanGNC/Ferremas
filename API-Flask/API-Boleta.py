@@ -5,112 +5,94 @@ from flask_cors import CORS
 import json
 from datetime import datetime
 from json import dumps
+import pyodbc
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 api = Api(app)
 
-url_cliente = "http://localhost:14792/api/Cliente"
-
-url_producto = "http://localhost:14792/api/Producto"
-
-contador = -1
-
-DatosBoleta = []
+# Configura la conexión a la base de datos
+def get_db_connection():
+    connection = pyodbc.connect(
+        'DRIVER={ODBC Driver 17 for SQL Server};'
+        'SERVER=serversqlferremas.database.windows.net;'
+        'DATABASE=bdferremas;'
+        'UID=adminFerremas;'
+        'PWD=ContraseñaFerremas098'
+    )
+    return connection
 
 class Boleta(Resource):
-    
+
     def post(self):
-     
-        global contador
-        contador = contador + 1
-
-        jsonn = request.get_json()
-
-        cliente_response = requests.get(url_cliente+"/"+ str(jsonn["IdCli"]))
-        producto_response = requests.get(url_producto+"/"+ str(jsonn["IdProd"]))
-        print(cliente_response.status_code)
-        if(cliente_response.status_code == 200 and producto_response.status_code == 200):
-            cliente_json = cliente_response.json()
-            producto_json = producto_response.json()    
-            date = datetime.now()
-            dt_str = date.strftime('%Y-%m-%d %H:%M:%S') 
-            json_date = json.dumps(dt_str)
-
-            lista = {
-                "IdBoleta": contador,
-                "IdCli": cliente_json["id"],
-                "NombreCli": cliente_json["nombre"],
-                "DireccionCli": cliente_json["direccion"],
-                "IdProd": producto_json["id"],
-                "NombreProd": producto_json["nombre"],
-                "MarcaProd": producto_json["marca"],
-                "TipoProd": producto_json["tipoProd"],
-                "PrecioProd": producto_json["precio"],
-                "Cantidad": jsonn["Cantidad"],
-                "Total": producto_json["precio"] * jsonn["Cantidad"],
-                "DespachoDomicilio": jsonn["DespachoDomicilio"],
-                "FechaBoleta": json_date}
-
+        query = "SELECT precio FROM producto WHERE idProducto = ?"
+        date = datetime.now()
+        dt_str = date.strftime('%Y-%m-%d %H:%M:%S') 
+        json_date = str(dt_str)
+        data = request.get_json()
+        connection = get_db_connection()
+        idProd = data['IdProd']
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(query, idProd)
+                precio = cursor.fetchone()
+                precio = str(precio).replace(',', '')
+                precio = str(precio).replace(')', '')
+                precio = str(precio).replace('(', '')
+                precio = int(precio)
+                total = data['Cantidad']*precio
+                cursor.execute("EXEC p_postBol ?, ?, ?, ?, ?, ?", (data['Cantidad'], total , data['TipoEntrega'], json_date, data['IdCli'], idProd))
+                connection.commit()
+                return {'message': 'Boleta created successfully'}, 201
+        finally:
+            connection.close()
             
-
-        else: 
-            print("error")
-
-        DatosBoleta.append(lista)
-
-        return ""
     
     def get(self):
-        return DatosBoleta
+        connection = get_db_connection()
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("EXEC p_getAllBol")
+                result = cursor.fetchall()
+                users = [{'idBoleta': row[0], 'cantidad': row[1], 'total': row[2], 'tipoEntrega': row[3], 'fechaBoleta': str(row[4])} for row in result]
+                return users
+        finally:
+            connection.close()
 
 class BoletaById(Resource):
-    def get(self,id):
-        return DatosBoleta[id]
+    def get(self, id):
+        connection = get_db_connection()
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("EXEC p_getBol ?", (id,))
+                result = cursor.fetchone()
+                if result:
+                    return {'IdBoleta': result[0], 'Cantidad': result[1], 'Total': result[2], 'TipoEntrega': result[3], 'FechaBoleta': str(result[4])}
+                return {'message': 'Boleta not found'}, 404
+        finally:
+            connection.close()
     
-    def put(self,id):
-        DatosBoleta.pop(id)
-
-        #Definir datos de la boleta
-
-
-        jsonn = request.get_json()
-
-        cliente_response = requests.get(url_cliente+"/"+ str(jsonn["IdCli"]))
-        producto_response = requests.get(url_producto+"/"+ str(jsonn["IdProd"]))
-        print(cliente_response.status_code)
-        if(cliente_response.status_code == 200 and producto_response.status_code == 200):
-            cliente_json = cliente_response.json()
-            producto_json = producto_response.json()    
-            date = datetime.now()
-            dt_str = date.strftime('%Y-%m-%d %H:%M:%S') 
-            json_date = json.dumps(dt_str)
-
-            lista = {
-                "IdBoleta": id,
-                "IdCli": cliente_json["id"],
-                "NombreCli": cliente_json["nombre"],
-                "DireccionCli": cliente_json["direccion"],
-                "IdProd": producto_json["id"],
-                "NombreProd": producto_json["nombre"],
-                "MarcaProd": producto_json["marca"],
-                "TipoProd": producto_json["tipoProd"],
-                "PrecioProd": producto_json["precio"],
-                "Cantidad": jsonn["Cantidad"],
-                "Total": producto_json["precio"] * jsonn["Cantidad"],
-                "DespachoDomicilio": jsonn["DespachoDomicilio"],
-                "FechaBoleta": json_date}
-
-        else: 
-            print("error")
-
-        DatosBoleta.insert(id,lista)
-        return ""
+    def put(self, id):
+        data = request.get_json()
+        connection = get_db_connection()
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("EXEC p_putBol ?, ?, ?, ?", (id, data['Cantidad'], data['Cantidad'], data['TipoEntrega']))
+                connection.commit()
+                return {'message': 'Boleta updated successfully'}
+        finally:
+            connection.close()
     
     def delete(self, id):
-        DatosBoleta.pop(id)
-        return ""
+        connection = get_db_connection()
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("EXEC p_deleteBol ?", (id))
+                connection.commit()
+                return {'message': 'Boleta deleted successfully'}
+        finally:
+            connection.close()
    
 api.add_resource(Boleta, "/api/boleta/")
 api.add_resource(BoletaById, "/api/boleta/<int:id>")

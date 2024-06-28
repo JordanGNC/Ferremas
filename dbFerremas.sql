@@ -46,10 +46,19 @@ CREATE TABLE pedido(
 
 BEGIN TRANSACTION 
 	IF NOT EXISTS (SELECT * FROM cliente WHERE cliente.idCliente = '1')
-	INSERT INTO cliente VALUES ('Jordan', '123', '1234', 'casa');
+	INSERT INTO cliente VALUES ('Jordan', '123', '1234', 'mi casa 123');
+
+	IF NOT EXISTS (SELECT * FROM cliente WHERE cliente.idCliente = '2')
+	INSERT INTO cliente VALUES ('Giselle', '321', '4321', 'su casa 321');
 
 	IF NOT EXISTS (SELECT * FROM producto WHERE producto.idProducto = '1')
 	INSERT INTO producto VALUES ('Martillo', 20000, 'CAT', 'Herramienta');
+
+	IF NOT EXISTS (SELECT * FROM producto WHERE producto.idProducto = '2')
+	INSERT INTO producto VALUES ('Taladro', 70000, 'Stanley', 'Herramienta');
+
+	IF NOT EXISTS (SELECT * FROM producto WHERE producto.idProducto = '3')
+	INSERT INTO producto VALUES ('Madera', 15000, 'sika', 'Material');
 
 	IF NOT EXISTS (SELECT * FROM boleta WHERE boleta.idBoleta = '1')
 	INSERT INTO boleta VALUES (1, 20000, 'Despacho a domicilio', '01/12/2024', 1, 1);
@@ -69,4 +78,10 @@ JOIN boleta ON pedido.idPedido=boleta.idBoleta;
 
 --DROP TABLE pedido,boleta,cliente,producto
 
-SELECT * FROM cliente
+--SELECT * FROM cliente
+
+--SELECT * FROM producto
+
+--SELECT * FROM boleta
+
+--SELECT * FROM pedido

@@ -54,7 +54,7 @@
                 let itemsStr = "";
                 await objeto.forEach(element => {
                     console.log({element});
-                    itemsStr += "<option value='"+ element.IdPedido +"'>" + element.IdPedido + "</option>";
+                    itemsStr += "<option value='"+ element.idPedido +"'>" + element.idPedido + "</option>";
                 });
                 cboPedido.innerHTML = itemsStr;
 
@@ -66,11 +66,11 @@
                 tabla = tabla + '<tr> <th>ID</th> <th>Cliente</th> <th>Estado</th> <th>Tipo de entrega</th> <th>Fecha del pedido</th></tr>';
                     await objeto.forEach(element => {
                         tabla = tabla + '<tr>';
-                        tabla = tabla + '<td>'+element.IdPedido+'</td>';
-                        tabla = tabla + '<td>'+element.NombreCli+'</td>';
-                        tabla = tabla + '<td>'+element.Estado+'</td>';
-                        tabla = tabla + '<td>'+element.TipodeEntrega+'</td>';
-                        tabla = tabla + '<td>'+element.FechaPedido+'</td>';
+                        tabla = tabla + '<td>'+element.idPedido+'</td>';
+                        tabla = tabla + '<td>'+element.nombreCli+'</td>';
+                        tabla = tabla + '<td>'+element.estado+'</td>';
+                        tabla = tabla + '<td>'+element.tipoEntrega+'</td>';
+                        tabla = tabla + '<td>'+element.fechaBoleta+'</td>';
                         tabla = tabla + '</tr>';
                     });
                 tabla = tabla + '</table>';
@@ -105,11 +105,11 @@
                 tabla = tabla + '<tr> <th>ID</th> <th>Cliente</th> <th>Estado</th> <th>Tipo de entrega</th> <th>Fecha del pedido</th></tr>';
         
                 tabla = tabla + '<tr>';
-                tabla = tabla + '<td>'+objeto.IdPedido+'</td>';
-                tabla = tabla + '<td>'+objeto.NombreCli+'</td>';
-                tabla = tabla + '<td>'+objeto.Estado+'</td>';
-                tabla = tabla + '<td>'+objeto.TipodeEntrega+'</td>';
-                tabla = tabla + '<td>'+objeto.FechaPedido+'</td>';
+                tabla = tabla + '<td>'+objeto.idPedido+'</td>';
+                tabla = tabla + '<td>'+objeto.nombreCli+'</td>';
+                tabla = tabla + '<td>'+objeto.estado+'</td>';
+                tabla = tabla + '<td>'+objeto.tipoEntrega+'</td>';
+                tabla = tabla + '<td>'+objeto.fechaBoleta+'</td>';
                 tabla = tabla + '</tr>';
 
                 tabla = tabla + '</table>';
@@ -130,7 +130,7 @@
             const estado = document.getElementById("txtEstado").value;
 
             const objEnvio = {
-                "Estado": estado
+                "estado": estado
             };
             console.log({objEnvio});
             
